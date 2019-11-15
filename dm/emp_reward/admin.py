@@ -18,7 +18,7 @@ from .models import *
 # Re-register UserAdmin
 # admin.site.register(User)
 # admin.site.register(User, UserAdmin)
-admin.site.register(employee)
+# admin.site.register(employee)
 admin.site.register(RecievedPoints)
 admin.site.register(BalancedPoints)
 admin.site.register(PointTrans)

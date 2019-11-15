@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'emp_reward.apps.EmpRewardConfig',
+    'background_task'
 ]
 
 MIDDLEWARE = [

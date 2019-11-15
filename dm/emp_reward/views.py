@@ -6,6 +6,11 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from .forms import *
 from .models import *
+from .tasks import *
+from background_task import background
+from datetime import datetime, timedelta
+from django.utils import timezone
+from django.contrib.auth.models import User
 # Create your views here.
 
 

@@ -19,8 +19,8 @@ from emp_reward import views as main_views
 from django.conf.urls import url, include
 from django.urls import path
 from django.contrib.auth import views as auth_views
-
-
+from django.contrib.auth.models import User
+from emp_reward.tasks import add_points
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,3 +28,5 @@ urlpatterns = [
     url(r'^signup/$', main_views.signup, name='signup'),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login')
 ]
+
+add_points(repeat = 2592000)

@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from datetime import datetime 
+from django.utils import timezone
 
 # Create your models here.
 
@@ -25,22 +27,23 @@ from django.dispatch import receiver
 
 
 # employee model
-class employee(models.Model):
-	eid = models.IntegerField(primary_key = True)
-	ename = models.CharField(max_length=20) 
-	password = models.CharField(max_length=20)
-	admin = models.BooleanField(default = False)
+# class employee(models.Model):
+# 	eid = models.IntegerField(primary_key = True)
+# 	ename = models.CharField(max_length=20) 
+# 	password = models.CharField(max_length=20)
+# 	admin = models.BooleanField(default = False)
 
 
 # employee recieved point 
 class RecievedPoints(models.Model):
-	eid = models.ForeignKey(employee, null=True, on_delete=models.PROTECT)
+	eid = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
+	timestamp = models.DateTimeField()
 	PAmount = models.IntegerField()
 
 
 # balanced point 
 class BalancedPoints(models.Model):
-	eid = models.ForeignKey(employee, null=True, on_delete=models.PROTECT)
+	eid = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
 	PAmount = models.IntegerField()
 
 
@@ -50,12 +53,12 @@ class PointTrans(models.Model):
 	PTransDate = models.DateField() 
 	pointAmount = models.IntegerField()
 	received_eId = models.IntegerField()
-	given_eId = models.ForeignKey(employee, null=True, on_delete=models.PROTECT)
+	given_eId = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
 
 
 # employee redeemed giftcards 
 class GiftCards(models.Model):
-	eid = models.ForeignKey(employee, null=True, on_delete=models.PROTECT)
+	eid = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
 	GAmount = models.IntegerField()
 
 
@@ -64,4 +67,4 @@ class GiftTrans(models.Model):
 	GTransId = models.IntegerField(primary_key = True)
 	GTransDate = models.DateField() 
 	giftcardAmount = models.IntegerField()
-	eid = models.ForeignKey(employee, null=True, on_delete=models.PROTECT)
+	eid = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
