@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime 
 from django.utils import timezone
-
+# from cms.utils.permissions import get_current_user 
 # Create your models here.
 
 # # Create your models here.
@@ -35,36 +35,37 @@ from django.utils import timezone
 
 
 # employee recieved point 
-class RecievedPoints(models.Model):
+class MonthlyPoints(models.Model):
 	eid = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
 	timestamp = models.DateTimeField()
-	PAmount = models.IntegerField()
+	PAmountReceived = models.IntegerField()
+	balanceLeft = models.IntegerField()
 
-
-# balanced point 
-class BalancedPoints(models.Model):
+# total point 
+class TotalPoints(models.Model):
 	eid = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
 	PAmount = models.IntegerField()
 
 
 # point transaction 
 class PointTrans(models.Model):
-	PTransId = models.IntegerField(primary_key = True)
-	PTransDate = models.DateField() 
+	PTransId = models.AutoField(primary_key = True)
+	PTransDate = models.DateTimeField(null=True) 
 	pointAmount = models.IntegerField()
-	received_eId = models.IntegerField()
-	given_eId = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
+	received_eId = models.ForeignKey(User, null=True, on_delete=models.PROTECT, related_name= "points_received_by")
+	message = models.CharField(max_length=240,null=True)
+	given_eId = models.ForeignKey(User, null=True, on_delete=models.PROTECT, related_name= "points_given_by")
 
-
+	# def save(self, *args, **kwargs):
+	# 	user = get_current_user()
+	# 	if user and not user.pk:
+	# 		user = None
+	# 	if not self.pk:
+	# 		self.given_eId = user
+	# 	super(PointTrans, self).save(*args, **kwargs)
 # employee redeemed giftcards 
 class GiftCards(models.Model):
+	GTransId = models.AutoField(primary_key = True)
 	eid = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
-	GAmount = models.IntegerField()
-
-
-# giftcard transaction 
-class GiftTrans(models.Model):
-	GTransId = models.IntegerField(primary_key = True)
-	GTransDate = models.DateField() 
-	giftcardAmount = models.IntegerField()
-	eid = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
+	timestamp = models.DateTimeField(null = True)
+	GAmount = models.IntegerField(null=True)

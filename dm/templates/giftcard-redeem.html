@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<form action='.' method='POST'>{% csrf_token %}
+    {{ events.as_p }}
+	<input type='submit' value='Transfer Points' />
+</form>
+
+{% if messages %}
+<ul class="messages" style="color: red">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+{% endblock %}

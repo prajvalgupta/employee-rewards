@@ -26,7 +26,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', main_views.home, name='home'),
     url(r'^signup/$', main_views.signup, name='signup'),
-    url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login')
+    url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^points-transfer/$', main_views.pointTranscview, name='pointsTransfer'),
+    url(r'^redeem/$', main_views.GiftCardRedeemView, name='giftcard-redeem'),
 ]
 
 add_points(repeat = 2592000)

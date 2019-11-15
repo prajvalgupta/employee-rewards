@@ -71,9 +71,9 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{% url 'login' %}">Login/Signup</a></li>
-        <li><a href="#">Sending Points</a></li>
+        <li><a href="{% url 'pointsTransfer' %}">Transferring Points</a></li>
         <li><a href="./history.html">History Points</a></li>
-        <li><a href="./giftcard.html">Gift Cards</a></li>
+        <li><a href="{% url 'giftcard-redeem' %}">Gift Cards</a></li>
       </ul>
     </div>
   </div>
