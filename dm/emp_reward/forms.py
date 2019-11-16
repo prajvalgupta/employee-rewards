@@ -25,6 +25,7 @@ class PointsTransferForm(forms.ModelForm):
 	received_eId = forms.ModelChoiceField(label="Who do you want to give the points to?",queryset=User.objects.all(), empty_label="(Nothing)")
 	message = forms.CharField(widget=forms.Textarea,label="Do you want to add some thank you note?",max_length=240)
 
+
 	def __init__(self, *args, **kwargs):
 		super(PointsTransferForm, self).__init__(*args, **kwargs)
 		queryset = self.fields['received_eId'].queryset
@@ -33,15 +34,13 @@ class PointsTransferForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		obj = super(PointsTransferForm, self).save(commit=False)
-		user = get_current_user()
-		if obj.given_eId is None:
-			obj.PTransDate = timezone.now()
+		obj.PTransDate = timezone.now()
 		if commit:
 			obj.save()
 		return obj
 	class Meta:
 		model = PointTrans
-		fields = ('pointAmount','received_eId','message')
+		fields = ('pointAmount','received_eId','message','PTransId')
 
 
 
@@ -61,6 +60,8 @@ class GiftCardRedeemForm(forms.ModelForm):
 	class Meta:
 		model = GiftCards
 		fields = ('GAmount',)
+
+
 
 
 # class SortPointsForm(forms.Form):

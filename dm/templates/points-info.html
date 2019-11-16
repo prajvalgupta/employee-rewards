@@ -6,9 +6,10 @@
 <table align="center" style="width: 50%;">
 			<thead>
 				<tr>
-					<th>Receiver_eid</th>
+					<th>Received By</th>
+					<th>Given By </th>
 					<th>Month</th>
-					<th>Points</th>
+					<th>Total Points</th>
 				</tr>
 			</thead>	
 			<tbody>
@@ -24,5 +25,33 @@
 			
 </table>	
 
+<br>
+<h2 align=center>Points given Out by the respective users</h2>
+
+{% for user,list in summary.items %}
+<table align="center" border=1 frame=void rules=rows style="width: 50%;">
+			<thead>
+				<tr>
+				<th style="font-weight:bold;">{{ user }}</th>
+			</tr>
+				<tr>
+					<th>Received By</th>
+					<th>Month</th>
+					<th>Total Points</th>
+				</tr>
+			</thead>	
+			<tbody>
+			{% for i in list %}
+				<tr>
+				{% for key,value in i.items %}
+				<td>{{ value }}</td>
+				{% endfor %}
+				
+			</tr>	
+			{% endfor %}
+			</tbody>
+</table>	
+
+{% endfor %}
 
 {% endblock %}

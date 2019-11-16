@@ -60,6 +60,10 @@ def pointTranscview(request):
 		event = PointsTransferForm(request.POST or None)
 		if event.is_valid():
 			event.save()
+			user_sess = PointTrans.objects.order_by('-PTransId')[0]
+			# print(user_sess)
+			user_sess.given_eId_id = request.user.id
+			user_sess.save()
 			instance = MonthlyPoints.objects.get(eid = request.user)
 			instance.balanceLeft-=event.cleaned_data.get('pointAmount')
 			instance.save()
@@ -88,7 +92,11 @@ def GiftCardRedeemView(request):
 	if request.user.is_authenticated:
 		event = GiftCardRedeemForm(request.POST or None)
 		if event.is_valid():
-			event.eid = request.user
+			event.save()
+			user_sess = GiftCards.objects.order_by('-GTransId')[0]
+			# print(user_sess)
+			user_sess.eid_id = request.user.id
+			user_sess.save()
 			total_instance = TotalPoints.objects.get(eid = request.user)
 			if total_instance.PAmount >= 10*event.cleaned_data.get('GAmount'):
 				total_instance.PAmount-= 10*event.cleaned_data.get('GAmount')
@@ -114,10 +122,16 @@ def search(request):
 
 def sortPoints(request):
 	if request.user.is_authenticated:
-			
-		points = PointTrans.objects.annotate(month=TruncMonth('PTransDate')).values('received_eId','month').annotate(c=Sum('pointAmount')).order_by('month')
+		mu_points = PointTrans.objects.annotate(month=TruncMonth('PTransDate')).values('received_eId','given_eId','month').annotate(c=Sum('pointAmount')).order_by('month')
+		
+		users = User.objects.all()
+		summary = {}
+		for user in users:
+			summary[user.username] = PointTrans.objects.filter(given_eId_id=user.id).annotate(month=TruncMonth('PTransDate')).values('received_eId','month').annotate(c=Sum('pointAmount')).order_by('month')
+
 		context = {
-		'points': points
+		'points': mu_points,
+		'summary':summary
 		}
 		return render(request, "points-info.html", context)
 	else:
