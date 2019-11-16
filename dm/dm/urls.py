@@ -31,7 +31,8 @@ urlpatterns = [
     url(r'^points-transfer/$', main_views.pointTranscview, name='pointsTransfer'),
     url(r'^redeem/$', main_views.GiftCardRedeemView, name='giftcard-redeem'),
     # url(r'^search/$', main_views.search, name='search')
-    url(r'^search/$', main_views.sortPoints, name='search')
+    url(r'^search/$', main_views.sortPoints, name='search'),
+    url(r'^reset/$', main_views.ResetPointsView, name='reset')
 ]
 
 add_points(repeat = 2592000)

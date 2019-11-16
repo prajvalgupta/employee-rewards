@@ -2,18 +2,22 @@
 
 {% block content %}
 
+{% if user.is_superuser %}
 
+
+<h2 align=center>Points summary for all users</h2>
+<br>
 <table align="center" style="width: 50%;">
 			<thead>
 				<tr>
-					<th>Received By</th>
-					<th>Given By </th>
 					<th>Month</th>
-					<th>Total Points</th>
+					<th>Employee</th>
+					<th>Total Points Given</th>
+					<th>Total Points Received</th>
 				</tr>
 			</thead>	
 			<tbody>
-			{% for i in points %}
+			{% for i in monthly_det %}
 				<tr>
 				{% for key,value in i.items %}
 				<td>{{ value }}</td>
@@ -25,10 +29,64 @@
 			
 </table>	
 
+
+<br>
+
+<h2 align=center>Balances left for all users</h2>
+<br>
+<table align="center" style="width: 50%;">
+			<thead>
+				<tr>
+					<th>Month</th>
+					<th>Employee</th>
+					<th>Balance Points</th>
+				</tr>
+			</thead>	
+			<tbody>
+			{% for i in bal_points %}
+				<tr>
+				<td>{{ i.month }}</td>
+				<td>{{ i.eid }}</td>
+				<td>{{ i.balanceLeft }}</td>
+			</tr>	
+			{% endfor %}
+			</tbody>
+			
+</table>	
+
+<br>
+
+<h2 align=center>Gift Cards redeemed by all users</h2>
+<br>
+<table align="center" style="width: 50%;">
+			<thead>
+				<tr>
+					<th>Month</th>
+					<th>Employee</th>
+					<th>Gift Card Value</th>
+					<th>Points Redeemed</th>
+				</tr>
+			</thead>	
+			<tbody>
+			{% for i in redeemed_points %}
+				<tr>
+				<td>{{ i.month }}</td>
+				<td>{{ i.eid }}</td>
+				<td>{{ i.GAmount }}</td>
+				<td>{{ i.points }}</td>
+			</tr>	
+			{% endfor %}
+			</tbody>
+			
+</table>	
+
+
+
 <br>
 <h2 align=center>Points given Out by the respective users</h2>
 
 {% for user,list in summary.items %}
+<br>
 <table align="center" border=1 frame=void rules=rows style="width: 50%;">
 			<thead>
 				<tr>
@@ -53,5 +111,74 @@
 </table>	
 
 {% endfor %}
+
+
+<br>
+<br>
+
+<h2 align=center>All Transaction Details</h2>
+<br>
+<table align="center" style="width: 50%;">
+			<thead>
+				<tr>
+					<th>Received By</th>
+					<th>Given By </th>
+					<th>Month</th>
+					<th>Total Points</th>
+				</tr>
+			</thead>	
+			<tbody>
+			{% for i in points %}
+				<tr>
+				{% for key,value in i.items %}
+				<td>{{ value }}</td>
+				{% endfor %}
+				
+			</tr>	
+			{% endfor %}
+			</tbody>
+			
+</table>
+
+{% else %}
+
+<h2 align=center>My Points History</h2>
+
+{% for user,list in summary.items %}
+<br>
+<table align="center" border=1 frame=void rules=rows style="width: 50%;">
+			<thead>
+				<tr>
+				<th style="font-weight:bold;">{{ user }}</th>
+			</tr>
+				<tr>
+					<th>Received By</th>
+					<th>Given By</th>
+					<th>Month</th>
+					<th>Total Points</th>
+				</tr>
+			</thead>	
+			<tbody>
+			{% for i in list %}
+				<tr>
+				{% for key,value in i.items %}
+				<td>{{ value }}</td>
+				{% endfor %}
+				
+			</tr>	
+			{% endfor %}
+			</tbody>
+</table>	
+
+{% endfor %}
+
+
+<br>
+
+{% endif %}	
+
+
+<button type="submit" onclick="location.href='{% url 'reset' %}'" name='mybtn2'>Reset month</button>
+
 
 {% endblock %}

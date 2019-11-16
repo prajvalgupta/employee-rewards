@@ -50,16 +50,14 @@ class GiftCardRedeemForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		obj = super(GiftCardRedeemForm, self).save(commit=False)
-		user = get_current_user()
-		if obj.eid is None:
-			obj.timestamp = timezone.now()
+		obj.timestamp = timezone.now()
 		if commit:
 			obj.save()
 		return obj
 
 	class Meta:
 		model = GiftCards
-		fields = ('GAmount',)
+		fields = ('GAmount','GTransId')
 
 
 

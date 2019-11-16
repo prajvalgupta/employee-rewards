@@ -49,3 +49,29 @@ class PointsAdmin(admin.ModelAdmin):
             return instances
         else:
             return formset.save()
+
+
+class GiftAdmin(admin.ModelAdmin):
+    fields= ('eid','timestamp','GAmount')
+    def save_model(self, request, obj, form, change): 
+        instance = form.save(commit=False)
+        if not hasattr(instance,'eid'):
+            instance.eid = request.user
+        instance.save()
+        form.save_m2m()
+        return instance
+
+    def save_formset(self, request, form, formset, change): 
+
+        def set_user(instance):
+            if not instance.eid:
+                instance.eid = request.user
+            instance.save()
+
+        if formset.model == GiftCards:
+            instances = formset.save(commit=False)
+            map(set_user, instances)
+            formset.save_m2m()
+            return instances
+        else:
+            return formset.save()
