@@ -12,6 +12,19 @@ from background_task import background
 from datetime import datetime, timedelta
 from django.utils import timezone
 from django.contrib.auth.models import User
+from .filters import UserFilter
+from django.template.defaulttags import register
+from django.http import HttpRequest
+from rest_framework.views import APIView
+from . import serializers
+from rest_framework.response import Response
+from rest_framework import status
+from django.core.exceptions import ObjectDoesNotExist,MultipleObjectsReturned
+from rest_framework.decorators import api_view
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework import generics
+from django.db.models.functions import TruncMonth
+from django.db.models import Count, Sum
 # Create your views here.
 
 
@@ -93,8 +106,24 @@ def GiftCardRedeemView(request):
 		messages.info(request, 'You are not logged in. Please login first to create an event')
 		return redirect('login')
 
+def search(request):
+	user_list = PointTrans.objects.all()
+	user_filter = UserFilter(request.GET, queryset=user_list)
+	return render(request, 'user_list.html', {'filter': user_filter})
+
+
+def sortPoints(request):
+	if request.user.is_authenticated:
 			
-			
+		points = PointTrans.objects.annotate(month=TruncMonth('PTransDate')).values('received_eId','month').annotate(c=Sum('pointAmount')).order_by('month')
+		context = {
+		'points': points
+		}
+		return render(request, "points-info.html", context)
+	else:
+		# raise ValidationError("You are not authorized to add a venue (Admin only activity)") 
+		messages.info(request, 'You are not logged in. Please login first to create an event')
+		return redirect('login')
 
 
 

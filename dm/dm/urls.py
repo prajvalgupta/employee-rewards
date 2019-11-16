@@ -27,8 +27,11 @@ urlpatterns = [
     url(r'^$', main_views.home, name='home'),
     url(r'^signup/$', main_views.signup, name='signup'),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
     url(r'^points-transfer/$', main_views.pointTranscview, name='pointsTransfer'),
     url(r'^redeem/$', main_views.GiftCardRedeemView, name='giftcard-redeem'),
+    # url(r'^search/$', main_views.search, name='search')
+    url(r'^search/$', main_views.sortPoints, name='search')
 ]
 
 add_points(repeat = 2592000)

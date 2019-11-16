@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="get">
+    <div>Eid{{ filter.form.received_eId }}</div>
+    <div>Date{{ filter.form.PTransDate }}</div>
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+  {% for user in filter.qs %}
+    <li>{{ user.received_eId }} - {{ user.pointAmount }} - {{ user.PTransDate }}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

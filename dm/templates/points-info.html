@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<table align="center" style="width: 50%;">
+			<thead>
+				<tr>
+					<th>Receiver_eid</th>
+					<th>Month</th>
+					<th>Points</th>
+				</tr>
+			</thead>	
+			<tbody>
+			{% for i in points %}
+				<tr>
+				{% for key,value in i.items %}
+				<td>{{ value }}</td>
+				{% endfor %}
+				
+			</tr>	
+			{% endfor %}
+			</tbody>
+			
+</table>	
+
+
+{% endblock %}

@@ -6,9 +6,34 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+   -->
+
+   <script type="text/javascript">
+    $(function(){
+        $( "#datepicker" ).datepicker({
+          yearRange: "-120:+0",
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "yy-mm-dd",
+          beforeShow: function() {
+          setTimeout(function(){
+            $('.ui-datepicker').css('z-index', 9999);
+        }, 0);
+    }});
+  });
+</script>
   <style>
   body {
     font: 20px Montserrat, sans-serif;
@@ -72,18 +97,24 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{% url 'login' %}">Login/Signup</a></li>
         <li><a href="{% url 'pointsTransfer' %}">Transferring Points</a></li>
-        <li><a href="./history.html">History Points</a></li>
+        <li><a href="{% url 'search' %}">History Points</a></li>
         <li><a href="{% url 'giftcard-redeem' %}">Gift Cards</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% endif %}
       </ul>
     </div>
   </div>
 </nav>
 
 
-<div class="container-fluid bg-2 text-left">
+<div class="container-fluid bg-3 text-left">
+
 {% block content %}
 {% endblock %}
 </div>
+
+
 <!-- Footer -->
 <footer class="container-fluid bg-4 text-center">
   <p>Employee Rewards System Made By Pei-Hsin Ho and Prajval Gupta</p> 

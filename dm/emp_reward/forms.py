@@ -5,6 +5,8 @@ from .models import *
 from django.forms import DateInput
 from django.utils import timezone
 from crum import get_current_user 
+import django_filters
+from django_filters import widgets
 
 class UserForm(UserCreationForm):
 	# user_name = forms.CharField(max_length=50)
@@ -61,6 +63,19 @@ class GiftCardRedeemForm(forms.ModelForm):
 		fields = ('GAmount',)
 
 
+# class SortPointsForm(forms.Form):
+
+# 	PTransDate = forms.DateField(
+#         widget=forms.DateInput(
+#             attrs={
+#                 'id': 'datepicker',
+#                 'type': 'text'
+#             }
+#         )
+#     )
+
+# 	class Meta:	
+# 		fields = ('PTransDate','received_eId')
 
 
 
