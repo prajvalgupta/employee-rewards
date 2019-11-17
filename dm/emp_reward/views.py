@@ -61,27 +61,33 @@ def pointTranscview(request):
 	if request.user.is_authenticated:
 		event = PointsTransferForm(request.POST or None)
 		if event.is_valid():
-			event.save()
-			user_sess = PointTrans.objects.order_by('-PTransId')[0]
-			# print(user_sess)
-			user_sess.given_eId_id = request.user.id
-			user_sess.save()
 			instance = MonthlyPoints.objects.get(eid = request.user)
-			instance.balanceLeft-=event.cleaned_data.get('pointAmount')
-			instance.save()
-			print(event.cleaned_data.get('received_eId'))
-			user_name = event.cleaned_data.get('received_eId')
-			user_inst = User.objects.get(username = user_name)
-			try:
-				total_instance = TotalPoints.objects.get(eid = user_inst)
-				total_instance.PAmount+= event.cleaned_data.get('pointAmount')
-			except:
-				total_instance = TotalPoints()
-				total_instance.eid = user_inst
-				total_instance.PAmount = event.cleaned_data.get('pointAmount')
-			total_instance.save()
+			new_amount = event.cleaned_data.get('pointAmount')
+			if instance.balanceLeft>=new_amount:
+				event.save()
+				user_sess = PointTrans.objects.order_by('-PTransId')[0]
+				# print(user_sess)
+				user_sess.given_eId_id = request.user.id
+				user_sess.save()
+				
+
+				instance.balanceLeft-=event.cleaned_data.get('pointAmount')
+				instance.save()
+				print(event.cleaned_data.get('received_eId'))
+				user_name = event.cleaned_data.get('received_eId')
+				user_inst = User.objects.get(username = user_name)
+				try:
+					total_instance = TotalPoints.objects.get(eid = user_inst)
+					total_instance.PAmount+= event.cleaned_data.get('pointAmount')
+				except:
+					total_instance = TotalPoints()
+					total_instance.eid = user_inst
+					total_instance.PAmount = event.cleaned_data.get('pointAmount')
+				total_instance.save()
+				messages.info(request, 'Points are transferred successfully')
+			else:
+				messages.info(request, 'You do not have enough points to transfer')
 			event = PointsTransferForm()
-			messages.info(request, 'Points are transferred successfully')
 		context = {
 		'events': event
 		}
@@ -95,7 +101,6 @@ def GiftCardRedeemView(request):
 	if request.user.is_authenticated:
 		event = GiftCardRedeemForm(request.POST or None)
 		if event.is_valid():
-			event.save()
 			total_instance = TotalPoints.objects.get(eid = request.user)
 			if total_instance.PAmount >= 10*event.cleaned_data.get('GAmount'):
 				total_instance.PAmount-= 10*event.cleaned_data.get('GAmount')
@@ -172,7 +177,7 @@ def sortPoints(request):
 
 		z = {**total_given[0], **total_received[0]}
 		# print(z) 
-		max_len = max(len(total_given),len(total_received))
+		min_len = min(len(total_given),len(total_received))
 
 		# for i in total_given:
 		# 	total_given_list.append(i)
@@ -189,11 +194,11 @@ def sortPoints(request):
 		bal_points = MonthlyPoints.objects.filter(balanceLeft__lte = 999).annotate(month=ExtractMonth('timestamp')).values('month','eid','balanceLeft').order_by('-month','-balanceLeft')
 		# print(bal_points)
 
-		for i in range(max_len):
+		for i in range(0,min_len):
 			z = {**total_given[i], **total_received[i]}
 			result_list.append(z)
 		
-		result = sorted(result_list, key = lambda i: i['points_Received'], reverse = True)	
+		result = sorted(result_list, key = lambda i: (i['month'],i['points_Received']), reverse = True)	
 
 
 		redeemed_points = GiftCards.objects.annotate(month=ExtractMonth('timestamp'), points = F('GAmount')*10).values('month','eid','GAmount','points').order_by('-month')

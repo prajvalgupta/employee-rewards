@@ -5,3 +5,6 @@ django-rest-auth
 django-background-tasks
 django-crum
 django-filter
+django-faker
+fake-factory==0.5.3
+python-dateutil

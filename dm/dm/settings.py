@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# FAKER_LOCALE = None     # settings.LANGUAGE_CODE is loaded
+# FAKER_PROVIDERS = None
 
 # Application definition
 
@@ -39,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'emp_reward.apps.EmpRewardConfig',
     'background_task',
-    'django_filters'
+    'django_filters',
+    'faker'
 ]
 
 SITE_ID = 1

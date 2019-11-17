@@ -140,6 +140,8 @@
 			
 </table>
 
+<button type="submit" onclick="location.href='{% url 'reset' %}'" name='mybtn2'>Reset month</button>
+
 {% else %}
 
 <h2 align=center>My Points History</h2>
@@ -178,7 +180,7 @@
 {% endif %}	
 
 
-<button type="submit" onclick="location.href='{% url 'reset' %}'" name='mybtn2'>Reset month</button>
+
 
 
 {% endblock %}
