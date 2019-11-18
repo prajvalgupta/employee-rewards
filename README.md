@@ -6,16 +6,15 @@ Prajval Gupta, Pei-Hsin Ho
 
 ## Credentials(user_name, password)
 Admin: prajval, Prajval@27
-Users: abcd, Prajval@27
-       abhishek, Password@1234
-       betty, Password@123
-       kelly, Password@321
+Users: abcd, Prajval@27 <br>
+       abhishek, Password@1234 <br>
+       betty, Password@123 <br>
+       kelly, Password@321 <br>
        wwww, Prajval@27
 
 
 ## ER Diagram
-![alt text](http://url/to/ERdiagram.png)
-
+![ER Diagram](https://github.com/prajvalgupta/employee-rewards/blob/master/ERdiagram.png)
 
 ## DDL and DML
 Since we used Django for this Employee Systems, we do not have the DML and DDL when we developed, but we dumped out the DDL. Here is the DDL.
@@ -27,7 +26,6 @@ As we think, 10000 points are hard to reach for a user in a month, so we modify 
 
 ## Our Employee Rewards System
 When you enter ​emp-rewards.appspot.com​ in your browser, the first welcome page of our system is below:
-
 
 
 
