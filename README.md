@@ -5,7 +5,7 @@ This repo is for the Data Management Course (MIS 284N) as mid-term project. The 
 Prajval Gupta, Pei-Hsin Ho
 
 ## Credentials(user_name, password)
-Admin: prajval, Prajval@27
+Admin: prajval, Prajval@27<br>
 Users: abcd, Prajval@27 <br>
        abhishek, Password@1234 <br>
        betty, Password@123 <br>
@@ -18,7 +18,11 @@ Users: abcd, Prajval@27 <br>
 
 ## DDL and DML
 Since we used Django for this Employee Systems, we do not have the DML and DDL when we developed, but we dumped out the DDL. Here is the DDL.
-
+![ER Diagram](https://github.com/prajvalgupta/employee-rewards/blob/master/READMEimg/auth_user.png)
+![ER Diagram](https://github.com/prajvalgupta/employee-rewards/blob/master/READMEimg/giftcards.png)
+![ER Diagram](https://github.com/prajvalgupta/employee-rewards/blob/master/READMEimg/monthlypoints.png)
+![ER Diagram](https://github.com/prajvalgupta/employee-rewards/blob/master/READMEimg/pointtrans.png)
+![ER Diagram](https://github.com/prajvalgupta/employee-rewards/blob/master/READMEimg/totalpoints.png)
 
 ## Any assumptions you made that you feel important to call out
 As we think, 10000 points are hard to reach for a user in a month, so we modify the rules: Users can redeem 10 points for a gift card that has the value $1. For example, if a user redeems 40 points, he or she will get a $4 gift card.
