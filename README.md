@@ -1,14 +1,21 @@
 # employee-rewards
 This repo is for the Data Management Course (MIS 284N) as mid-term project. The app is successfully deployed on http://emp-rewards.appspot.com/
 
-## Team Members:
+## Team Members
 Prajval Gupta, Pei-Hsin Ho
 
-## Credentials:
-
+## Credentials(user_name, password)
+Admin: prajval, Prajval@27
+Users: abcd, Prajval@27
+       abhishek, Password@1234
+       betty, Password@123
+       kelly, Password@321
+       wwww, Prajval@27
 
 
 ## ER Diagram
+
+
 
 ## DDL and DML
 Since we used Django for this Employee Systems, we do not have the DML and DDL when we developed, but we dumped out the DDL. Here is the DDL.
