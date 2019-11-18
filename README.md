@@ -14,7 +14,7 @@ Users: abcd, Prajval@27
 
 
 ## ER Diagram
-![alt text](/Users/peihsinho/Desktop/DataManagement/employee-rewards/ERdiagram.png)
+![alt text](http://url/to/ERdiagram.png)
 
 
 ## DDL and DML
