@@ -7,10 +7,10 @@ Prajval Gupta, Pei-Hsin Ho
 ## Credentials(user_name, password)
 Admin: prajval, Prajval@27<br>
 Users: abcd, Prajval@27 <br>
-&nbsp;&nbsp;&nbsp;abhishek, Password@1234 <br>
-&nbsp;&nbsp;&nbsp;betty, Password@123 <br>
-&nbsp;&nbsp;&nbsp;kelly, Password@321 <br>
-&nbsp;&nbsp;&nbsp;wwww, Prajval@27
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abhishek, Password@1234 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;betty, Password@123 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kelly, Password@321 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wwww, Prajval@27
 
 
 ## ER Diagram
