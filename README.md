@@ -4,14 +4,6 @@ This repo is for the Data Management Course (MIS 284N) as mid-term project. The 
 ## Team Members
 Prajval Gupta, Pei-Hsin Ho
 
-## Credentials(user_name, password)
-Admin: prajval, Prajval@27<br>
-Users: abcd, Prajval@27 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abhishek, Password@1234 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;betty, Password@123 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kelly, Password@321 <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wwww, Prajval@27
-
 
 ## ER Diagram
 ![ER Diagram](https://github.com/prajvalgupta/employee-rewards/blob/master/READMEimg/ERdiagram.png)
