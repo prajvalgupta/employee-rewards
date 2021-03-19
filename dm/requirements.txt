@@ -1,6 +1,6 @@
 Django==2.0.7
 PyMySQL==0.9.3
-djangorestframework==3.9.1
+djangorestframework==3.11.2
 django-rest-auth
 django-background-tasks
 django-crum
